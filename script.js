@@ -1,5 +1,5 @@
 // ===== EDIT THESE SETTINGS =====
-const intervalSeconds = 2; // 🔧 Change this number (seconds between new windows)
+const intervalSeconds = 1; // time between batches
 const bunnyLinks = [
     "https://image2url.com/r2/default/videos/1771271255539-6e2c1370-85c0-4dc0-8769-7829a5b772c5.mp4",
     "https://image2url.com/r2/default/videos/1771271255539-6e2c1370-85c0-4dc0-8769-7829a5b772c5.mp4",
@@ -8,22 +8,15 @@ const bunnyLinks = [
 ];
 // ===============================
 
-let currentIndex = 0;
 let intervalId = null;
 
-document.getElementById("bunnyBtn").addEventListener("click", function () {
-
-    // Prevent multiple intervals if button is clicked again
+document.getElementById("bunnyBtn").addEventListener("click", () => {
+    // Prevent multiple runs
     if (intervalId !== null) return;
 
     intervalId = setInterval(() => {
-        window.open(bunnyLinks[currentIndex], "_blank");
-
-        currentIndex++;
-        if (currentIndex >= bunnyLinks.length) {
-            currentIndex = 0; // loop back to start
-        }
-
+        bunnyLinks.forEach(link => {
+            window.open(link, "_blank");
+        });
     }, intervalSeconds * 1000);
 });
-
